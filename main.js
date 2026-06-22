@@ -302,8 +302,14 @@ function failBossBattle() {
     setNormalEnemy();
 }
 
+const tabWindow = document.getElementById("tab-window");
 const tabContent = document.getElementById("tab-content");
 const tabButtons = document.querySelectorAll(".tab-btn");
+const tabCloseButton = document.getElementById("tab-close-button");
+const tabExpandButton = document.getElementById("tab-expand-button");
+
+let activeTab = null;
+let isTabExpanded = false;
 
 const tabNames = {
     enri: "エンリタブ",
@@ -314,18 +320,64 @@ const tabNames = {
     other: "その他タブ"
 };
 
+function openTab(tabKey) {
+    activeTab = tabKey;
+
+    tabContent.textContent = tabNames[tabKey];
+
+    tabWindow.classList.add("open");
+
+    tabButtons.forEach((button) => {
+        button.classList.remove("active-tab");
+
+        if (button.dataset.tab === tabKey) {
+            button.classList.add("active-tab");
+        }
+    });
+}
+
+function closeTab() {
+    activeTab = null;
+    isTabExpanded = false;
+
+    tabWindow.classList.remove("open");
+    tabWindow.classList.remove("expanded");
+
+    tabButtons.forEach((button) => {
+        button.classList.remove("active-tab");
+    });
+}
+
+function toggleTab(tabKey) {
+    if (activeTab === tabKey) {
+        closeTab();
+    } else {
+        openTab(tabKey);
+    }
+}
+
+function toggleTabExpand() {
+    isTabExpanded = !isTabExpanded;
+
+    if (isTabExpanded) {
+        tabWindow.classList.add("expanded");
+    } else {
+        tabWindow.classList.remove("expanded");
+    }
+}
+
 tabButtons.forEach((button) => {
     button.addEventListener("pointerdown", () => {
-        const tabKey = button.dataset.tab;
-
-        tabContent.textContent = tabNames[tabKey];
-
-        tabButtons.forEach((tabButton) => {
-            tabButton.classList.remove("active-tab");
-        });
-
-        button.classList.add("active-tab");
+        toggleTab(button.dataset.tab);
     });
+});
+
+tabCloseButton.addEventListener("pointerdown", () => {
+    closeTab();
+});
+
+tabExpandButton.addEventListener("pointerdown", () => {
+    toggleTabExpand();
 });
 
 
