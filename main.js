@@ -100,6 +100,8 @@ function setBossEnemy() {
         bossChallengeStage = stage;
     }
 
+    stage = bossChallengeStage;
+
     const bossFile = getRandomFile(bossEnemies);
 
     enemySprite.src = `img/enemies/${bossFile}`;
@@ -194,6 +196,11 @@ function playEnemyHitAnimation() {
         : "enemy-hit-right";
 
     enemySprite.classList.add(direction);
+
+    setTimeout(() => {
+        enemySprite.classList.remove("enemy-hit-left");
+        enemySprite.classList.remove("enemy-hit-right");
+    }, 100);
 }
 
 function playPlayerAttackAnimation() {
@@ -202,6 +209,10 @@ function playPlayerAttackAnimation() {
     void playerSprite.offsetWidth;
 
     playerSprite.classList.add("player-attack");
+
+    setTimeout(() => {
+        playerSprite.classList.remove("player-attack");
+    }, 100);
 }
 
 enemyArea.addEventListener("pointerdown", () => {
