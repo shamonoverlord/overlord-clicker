@@ -301,6 +301,7 @@ body{
 
     user-select:none;
     pointer-events:none;
+    animation: enemyIdleFloat 0.95s ease-in-out infinite;
 }
 
 #player-sprite{
@@ -311,6 +312,7 @@ body{
 
     user-select:none;
     pointer-events:none;
+    animation: playerIdleFloat 1.15s ease-in-out infinite;
 }
 
 /* =========================
@@ -370,7 +372,55 @@ button{
     -webkit-user-select:none;
 }
 
+/* =========================
+   IDLE ANIMATION
+========================= */
 
+@keyframes enemyIdleFloat {
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    25%{
+        transform:translateY(-6px);
+    }
+
+    50%{
+        transform:translateY(0px);
+    }
+
+    75%{
+        transform:translateY(6px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+}
+
+@keyframes playerIdleFloat {
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    25%{
+        transform:translateY(-4px);
+    }
+
+    50%{
+        transform:translateY(0px);
+    }
+
+    75%{
+        transform:translateY(4px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+}
 
 
 
