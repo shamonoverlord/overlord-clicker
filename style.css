@@ -339,10 +339,14 @@ body{
     min-height:40px;
 
     display:flex;
+
+    flex-shrink:0;
 }
 
 .tab-btn{
     flex:1;
+
+    height:100%;
 
     font-size:18px;
     font-weight:bold;
