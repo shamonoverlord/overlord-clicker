@@ -6,6 +6,7 @@ let gold = 0;
 const tapDamage = 10;
 
 const enemyArea = document.getElementById("enemy-area");
+const enemySprite = document.getElementById("enemy-sprite");
 const hpBar = document.getElementById("enemy-hp-bar");
 const hpText = document.getElementById("enemy-hp-text");
 const goldText = document.getElementById("gold");
@@ -63,11 +64,18 @@ document.addEventListener("dragstart", (event) => {
 });
 
 function playEnemyHitAnimation() {
-    enemyArea.classList.remove("enemy-hit");
+    enemySprite.classList.remove("enemy-hit-left");
+    enemySprite.classList.remove("enemy-hit-right");
 
-    void enemyArea.offsetWidth;
+    void enemySprite.offsetWidth;
 
-    enemyArea.classList.add("enemy-hit");
+    const direction = Math.random() < 0.5
+        ? "enemy-hit-left"
+        : "enemy-hit-right";
+
+    enemySprite.classList.add(direction);
 }
+
+
 
 
