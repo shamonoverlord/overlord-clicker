@@ -112,10 +112,50 @@ body{
 
     transform:translate(-50%,-50%);
 
-    width:140px;
-    height:180px;
+    width:160px;
+    height:220px;
 
     border:2px solid red;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    padding:10px;
+
+    cursor:pointer;
+}
+
+#enemy-name{
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+#enemy-hp-text{
+    font-size:12px;
+    margin-bottom:5px;
+}
+
+#enemy-hp-container{
+    width:100%;
+    height:12px;
+
+    background:#444;
+
+    margin-bottom:15px;
+}
+
+#enemy-hp-bar{
+    width:100%;
+    height:100%;
+
+    background:#ff4444;
+}
+
+#enemy-image{
+    font-size:80px;
+
+    flex:1;
 
     display:flex;
     align-items:center;
