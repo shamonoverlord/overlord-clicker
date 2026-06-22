@@ -175,8 +175,11 @@ body{
 
     transform:translateX(-50%);
 
-    width:60px;
-    height:130px;
+    width:10vmin;
+    height:22vmin;
+
+    max-width:60px;
+    max-height:130px;
 
     display:flex;
     justify-content:center;
