@@ -48,3 +48,13 @@ enemyArea.addEventListener("click", () => {
 });
 
 updateEnemyUI();
+
+document.addEventListener("contextmenu", (event) => {
+    event.preventDefault();
+});
+
+
+
+
+
+
