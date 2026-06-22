@@ -569,7 +569,7 @@ button{
 
     border-top:2px solid #555;
 
-    transform:translateY(100%);
+    transform:translateY(calc(100% + 60px));
     transition:transform 0.2s ease-out;
 
     z-index:100;
