@@ -299,7 +299,47 @@ body{
     pointer-events:none;
 }
 
+/* =========================
+   DAMAGE TEXT
+========================= */
 
+.damage-text{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%, -50%);
+
+    color:#fff;
+    font-size:28px;
+    font-weight:bold;
+
+    text-shadow:
+        2px 2px 0 #000,
+        -2px 2px 0 #000,
+        2px -2px 0 #000,
+        -2px -2px 0 #000;
+
+    pointer-events:none;
+    user-select:none;
+
+    animation:damageFloat 0.7s ease-out forwards;
+
+    z-index:10;
+}
+
+@keyframes damageFloat{
+    0%{
+        opacity:1;
+        transform:translate(-50%, -50%) scale(1);
+    }
+
+    100%{
+        opacity:0;
+        transform:translate(-50%, -120%) scale(1.2);
+    }
+}
 
 
 
