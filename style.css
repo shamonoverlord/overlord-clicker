@@ -442,7 +442,7 @@ button{
     }
 
     50%{
-        transform:skewX(-28deg) scaleX(0.55) scaleY(1.35);
+        transform:skewX(-20deg) scaleX(0.65) scaleY(1.20);
     }
 
     100%{
@@ -456,7 +456,7 @@ button{
     }
 
     50%{
-        transform:skewX(28deg) scaleX(0.55) scaleY(1.35);
+        transform:skewX(20deg) scaleX(0.65) scaleY(1.20);
     }
 
     100%{
