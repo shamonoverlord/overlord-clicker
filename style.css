@@ -15,6 +15,12 @@ body{
     color:white;
 
     font-family:sans-serif;
+
+    user-select:none;
+    -webkit-user-select:none;
+
+    touch-action:manipulation;
+    -webkit-tap-highlight-color:transparent;
 }
 
 /* =========================
