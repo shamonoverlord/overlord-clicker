@@ -33,7 +33,7 @@ function showDamageText(damage) {
     });
 }
 
-enemyArea.addEventListener("click", () => {
+enemyArea.addEventListener("pointerdown", () => {
     enemyHp -= tapDamage;
 
     playPlayerAttackAnimation();
