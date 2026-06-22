@@ -292,6 +292,7 @@ document.addEventListener("dragstart", (event) => {
     event.preventDefault();
 });
 
+updateGoldUI();
 setNormalEnemy();
 
 function failBossBattle() {
