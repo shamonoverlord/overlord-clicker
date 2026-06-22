@@ -14,6 +14,9 @@ let bossTimerId = null;
 let bossChallengeStage = null;
 let canChallengeBoss = false;
 
+const normalEnemyPath = "img/enemies/normal/";
+const bossEnemyPath = "img/enemies/boss/";
+
 const normalEnemies = [
     "e001_slime_green.png",
     "e002_zombie_02_green.png",
@@ -29,6 +32,9 @@ const normalEnemies = [
 const bossEnemies = [
     "b001_slime_big_green.png"
 ];
+
+let normalEnemyBag = [];
+let bossEnemyBag = [];
 
 const stageDisplay = document.getElementById("stage-display");
 const bossButton = document.getElementById("boss-button");
@@ -73,19 +79,48 @@ function updateEnemyUI() {
     }
 }
 
-function getRandomFile(files) {
-    const index = Math.floor(Math.random() * files.length);
-    return files[index];
+function createShuffledBag(files) {
+    const bag = [...files];
+
+    for (let i = bag.length - 1; i > 0; i--) {
+        const randomIndex = Math.floor(Math.random() * (i + 1));
+
+        const temp = bag[i];
+        bag[i] = bag[randomIndex];
+        bag[randomIndex] = temp;
+    }
+
+    return bag;
+}
+
+function getNextEnemyFile(type) {
+    if (type === "normal") {
+        if (normalEnemyBag.length === 0) {
+            normalEnemyBag = createShuffledBag(normalEnemies);
+        }
+
+        return normalEnemyBag.shift();
+    }
+
+    if (type === "boss") {
+        if (bossEnemyBag.length === 0) {
+            bossEnemyBag = createShuffledBag(bossEnemies);
+        }
+
+        return bossEnemyBag.shift();
+    }
 }
 
 function setNormalEnemy() {
     isBossBattle = false;
     stopBossTimer();
 
-    const enemyFile = getRandomFile(normalEnemies);
+const enemyFile = getNextEnemyFile("normal");
 
-    enemySprite.src = `img/enemies/${enemyFile}`;
-    enemyName.textContent = "ザコ敵";
+enemySprite.src = normalEnemyPath + enemyFile;
+enemyName.textContent = enemyFile
+    .replace(".png", "")
+    .replace(/^e\d+_/, "");
 
     enemyMaxHp = Math.floor(100 * Math.pow(1.15, stage - 1));
     enemyHp = enemyMaxHp;
@@ -102,10 +137,12 @@ function setBossEnemy() {
 
     stage = bossChallengeStage;
 
-    const bossFile = getRandomFile(bossEnemies);
+const bossFile = getNextEnemyFile("boss");
 
-    enemySprite.src = `img/enemies/${bossFile}`;
-    enemyName.textContent = "ボス";
+enemySprite.src = bossEnemyPath + bossFile;
+enemyName.textContent = bossFile
+    .replace(".png", "")
+    .replace(/^b\d+_/, "");
 
     enemyMaxHp = Math.floor(500 * Math.pow(1.2, stage / 10 - 1));
     enemyHp = enemyMaxHp;
