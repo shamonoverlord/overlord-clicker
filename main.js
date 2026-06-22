@@ -47,6 +47,7 @@ const hpText = document.getElementById("enemy-hp-text");
 const bossTimeContainer = document.getElementById("boss-time-container");
 const bossTimeBar = document.getElementById("boss-time-bar");
 const goldText = document.getElementById("gold");
+const tabGoldText = document.getElementById("tab-gold");
 const playerSprite = document.getElementById("player-sprite");
 
 function updateEnemyUI() {
@@ -156,7 +157,7 @@ enemyName.textContent = bossFile
 function defeatEnemy() {
     if (isBossBattle) {
         gold += bossChallengeStage * 20;
-        goldText.textContent = gold;
+        updateGoldUI();
 
         stopBossTimer();
 
@@ -169,7 +170,7 @@ function defeatEnemy() {
     }
 
     gold += stage * 5;
-    goldText.textContent = gold;
+    updateGoldUI();
 
     if (canChallengeBoss) {
         setNormalEnemy();
@@ -383,7 +384,10 @@ tabExpandButton.addEventListener("pointerdown", () => {
     toggleTabExpand();
 });
 
-
+function updateGoldUI() {
+    goldText.textContent = gold;
+    tabGoldText.textContent = gold;
+}
 
 
 
