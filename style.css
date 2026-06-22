@@ -422,7 +422,35 @@ button{
     }
 }
 
+/* =========================
+   HIT ANIMATION
+========================= */
 
+#enemy-area.enemy-hit{
+    animation: enemyHitShake 0.12s steps(2);
+}
+
+@keyframes enemyHitShake{
+    0%{
+        transform:translate(-50%, -50%) translateX(0);
+    }
+
+    25%{
+        transform:translate(-50%, -50%) translateX(-4px);
+    }
+
+    50%{
+        transform:translate(-50%, -50%) translateX(4px);
+    }
+
+    75%{
+        transform:translate(-50%, -50%) translateX(-2px);
+    }
+
+    100%{
+        transform:translate(-50%, -50%) translateX(0);
+    }
+}
 
 
 
