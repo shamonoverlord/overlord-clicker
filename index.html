@@ -1,10 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-<title>Overlord Clicker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overlord Clicker</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>Overlord Clicker</h1>
-<p>ゲーム開発中</p>
+
+    <!-- Header -->
+    <header id="header">
+        <div id="stage-display">
+            Stage 1
+        </div>
+
+        <button id="boss-button">
+            Boss
+        </button>
+    </header>
+
+    <!-- Battlefield -->
+    <main id="battlefield">
+
+        <div id="left-allies">
+            左味方
+        </div>
+
+        <div id="enemy-area">
+            敵
+        </div>
+
+        <div id="right-allies">
+            右味方
+        </div>
+
+        <div id="player-area">
+            主人公
+        </div>
+
+    </main>
+
+    <!-- Status -->
+    <section id="status">
+
+        <div id="hp-section">
+
+            <div id="hp-label">
+                HP
+            </div>
+
+            <div id="hp-bar-container">
+                <div id="hp-bar"></div>
+            </div>
+
+        </div>
+
+        <div class="status-row">
+            Gold: <span id="gold">0</span>
+        </div>
+
+        <div class="status-row">
+            DPS: <span id="dps">0</span>
+        </div>
+
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+
+        <button class="skill-btn">Skill 1</button>
+        <button class="skill-btn">Skill 2</button>
+        <button class="skill-btn">Skill 3</button>
+
+    </section>
+
+    <!-- Tabs -->
+    <nav id="tabs">
+
+        <button class="tab-btn">Home</button>
+        <button class="tab-btn">Character</button>
+        <button class="tab-btn">Equipment</button>
+        <button class="tab-btn">Gacha</button>
+        <button class="tab-btn">Settings</button>
+
+    </nav>
+
+    <script src="main.js"></script>
+
 </body>
 </html>
