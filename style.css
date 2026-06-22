@@ -426,29 +426,41 @@ button{
    HIT ANIMATION
 ========================= */
 
-#enemy-area.enemy-hit{
-    animation: enemyHitShake 0.12s steps(2);
+#enemy-sprite.enemy-hit-left{
+    transform-origin:50% 100%;
+    animation:enemyHitStretchLeft 0.1s steps(1);
 }
 
-@keyframes enemyHitShake{
-    0%{
-        transform:translate(-50%, -50%) translateX(0);
-    }
+#enemy-sprite.enemy-hit-right{
+    transform-origin:50% 100%;
+    animation:enemyHitStretchRight 0.1s steps(1);
+}
 
-    25%{
-        transform:translate(-50%, -50%) translateX(-4px);
+@keyframes enemyHitStretchLeft{
+    0%{
+        transform:skewX(0deg) scaleX(1) scaleY(1);
     }
 
     50%{
-        transform:translate(-50%, -50%) translateX(4px);
-    }
-
-    75%{
-        transform:translate(-50%, -50%) translateX(-2px);
+        transform:skewX(-28deg) scaleX(0.55) scaleY(1.35);
     }
 
     100%{
-        transform:translate(-50%, -50%) translateX(0);
+        transform:skewX(0deg) scaleX(1) scaleY(1);
+    }
+}
+
+@keyframes enemyHitStretchRight{
+    0%{
+        transform:skewX(0deg) scaleX(1) scaleY(1);
+    }
+
+    50%{
+        transform:skewX(28deg) scaleX(0.55) scaleY(1.35);
+    }
+
+    100%{
+        transform:skewX(0deg) scaleX(1) scaleY(1);
     }
 }
 
