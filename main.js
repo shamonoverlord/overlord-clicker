@@ -11,6 +11,9 @@ let bossTimeLimit = 60;
 let bossTimeLeft = bossTimeLimit;
 let bossTimerId = null;
 
+let bossChallengeStage = null;
+let canChallengeBoss = false;
+
 const normalEnemies = [
     "e001_slime_green.png",
     "e002_zombie_02_green.png",
@@ -35,6 +38,8 @@ const enemySprite = document.getElementById("enemy-sprite");
 const enemyName = document.getElementById("enemy-name");
 const hpBar = document.getElementById("enemy-hp-bar");
 const hpText = document.getElementById("enemy-hp-text");
+const bossTimeContainer = document.getElementById("boss-time-container");
+const bossTimeBar = document.getElementById("boss-time-bar");
 const goldText = document.getElementById("gold");
 const playerSprite = document.getElementById("player-sprite");
 
@@ -52,11 +57,19 @@ function updateEnemyUI() {
         stageDisplay.textContent = `Stage ${stage}`;
         bossButton.textContent = "ボス戦へ移動";
 
-        if (stage % 10 === 0) {
-            bossButton.style.display = "block";
-        } else {
-            bossButton.style.display = "none";
-        }
+    if (canChallengeBoss) {
+        bossButton.style.display = "block";
+    } else {
+        bossButton.style.display = "none";
+    }
+    }
+    if (isBossBattle) {
+    const timePercent = bossTimeLeft / bossTimeLimit * 100;
+
+    bossTimeContainer.style.display = "block";
+    bossTimeBar.style.width = timePercent + "%";
+    } else {
+        bossTimeContainer.style.display = "none";
     }
 }
 
@@ -83,6 +96,10 @@ function setNormalEnemy() {
 function setBossEnemy() {
     isBossBattle = true;
 
+    if (bossChallengeStage === null) {
+        bossChallengeStage = stage;
+    }
+
     const bossFile = getRandomFile(bossEnemies);
 
     enemySprite.src = `img/enemies/${bossFile}`;
@@ -99,12 +116,14 @@ function setBossEnemy() {
 
 function defeatEnemy() {
     if (isBossBattle) {
-        gold += stage * 20;
+        gold += bossChallengeStage * 20;
         goldText.textContent = gold;
 
         stopBossTimer();
 
-        stage += 1;
+        stage = bossChallengeStage + 1;
+        bossChallengeStage = null;
+        canChallengeBoss = false;
 
         setNormalEnemy();
         return;
@@ -113,8 +132,14 @@ function defeatEnemy() {
     gold += stage * 5;
     goldText.textContent = gold;
 
+    if (canChallengeBoss) {
+        setNormalEnemy();
+        return;
+    }
+
     if (stage % 10 === 9) {
         stage += 1;
+        bossChallengeStage = stage;
         setBossEnemy();
     } else {
         stage += 1;
@@ -128,12 +153,11 @@ function startBossTimer() {
     bossTimerId = setInterval(() => {
         bossTimeLeft -= 1;
 
-        if (bossTimeLeft <= 0) {
-            bossTimeLeft = 0;
-            stopBossTimer();
-            setNormalEnemy();
-            return;
-        }
+    if (bossTimeLeft <= 0) {
+        bossTimeLeft = 0;
+        failBossBattle();
+        return;
+    }
 
         updateEnemyUI();
     }, 1000);
@@ -200,8 +224,9 @@ enemyArea.addEventListener("pointerdown", () => {
 
 bossButton.addEventListener("pointerdown", () => {
     if (isBossBattle) {
-        setNormalEnemy();
+        failBossBattle();
     } else {
+        bossChallengeStage = stage + 1;
         setBossEnemy();
     }
 });
@@ -219,3 +244,23 @@ document.addEventListener("dragstart", (event) => {
 });
 
 setNormalEnemy();
+
+function failBossBattle() {
+    stopBossTimer();
+
+    stage = bossChallengeStage - 1;
+    canChallengeBoss = true;
+
+    setNormalEnemy();
+}
+
+
+
+
+
+
+
+
+
+
+
