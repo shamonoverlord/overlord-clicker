@@ -293,11 +293,21 @@ body{
     align-items:center;
 
     width:100%;
+
+    padding-bottom:6px;
+    border-bottom:1px solid #444;
 }
 
 #dps-display,
 #gold-display{
     font-size:16px;
+    font-weight:bold;
+}
+
+#tab-content{
+    padding-top:10px;
+
+    font-size:18px;
     font-weight:bold;
 }
 
@@ -338,7 +348,14 @@ body{
 .tab-btn{
     flex:1;
 
-    font-size:12px;
+    font-size:18px;
+    font-weight:bold;
+
+    border:1px solid #555;
+}
+
+.active-tab{
+    background:#ffcc33;
 }
 
 /* =========================
