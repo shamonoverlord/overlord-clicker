@@ -48,6 +48,8 @@ body{
     background:#1f1f1f;
 
     overflow:hidden;
+
+    touch-action:manipulation;
 }
 
 /* =========================
@@ -141,6 +143,9 @@ body{
     padding:10px;
 
     cursor:pointer;
+
+    touch-action:manipulation;
+    -webkit-tap-highlight-color:transparent;
 }
 
 #enemy-name{
