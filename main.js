@@ -7,6 +7,7 @@ const tapDamage = 10;
 
 const enemyArea = document.getElementById("enemy-area");
 const enemySprite = document.getElementById("enemy-sprite");
+const playerSprite = document.getElementById("player-sprite");
 const hpBar = document.getElementById("enemy-hp-bar");
 const hpText = document.getElementById("enemy-hp-text");
 const goldText = document.getElementById("gold");
@@ -35,6 +36,7 @@ function showDamageText(damage) {
 enemyArea.addEventListener("click", () => {
     enemyHp -= tapDamage;
 
+    playPlayerAttackAnimation();
     playEnemyHitAnimation();
     showDamageText(tapDamage);
 
@@ -76,6 +78,12 @@ function playEnemyHitAnimation() {
     enemySprite.classList.add(direction);
 }
 
+function playPlayerAttackAnimation() {
+    playerSprite.classList.remove("player-attack");
 
+    void playerSprite.offsetWidth;
+
+    playerSprite.classList.add("player-attack");
+}
 
 
