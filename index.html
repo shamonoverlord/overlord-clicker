@@ -31,16 +31,13 @@
 
 <div id="enemy-area">
 
-    <div id="enemy-name">
-        スライム
-    </div>
-
-    <div id="enemy-hp-text">
-        100 / 100
-    </div>
-
     <div id="enemy-hp-container">
         <div id="enemy-hp-bar"></div>
+
+        <div id="enemy-info-on-bar">
+            <span id="enemy-name">スライム</span>
+            <span id="enemy-hp-text">100 / 100</span>
+        </div>
     </div>
 
     <div id="boss-time-container">
@@ -49,11 +46,11 @@
     
     <div id="enemy-image">
 
-    <img
-        id="enemy-sprite"
-        src="img/enemies/e001_slime_green.png"
-        alt="Slime"
-    >
+        <img
+            id="enemy-sprite"
+            src="img/enemies/e001_slime_green.png"
+            alt="Slime"
+        >
 
     </div>
     
@@ -75,35 +72,16 @@
 
     </main>
 
-<!-- Status -->
-<section id="status">
-
-    <div id="hp-section">
-
-        <div id="hp-label">
-            HP
-        </div>
-
-        <div id="hp-bar-container">
-            <div id="hp-bar"></div>
-        </div>
-
-    </div>
-
-    <div class="status-row">
-        Gold: <span id="gold">0</span>
-    </div>
-
-    <div class="status-row">
-        DPS: <span id="dps">0</span>
-    </div>
-
-</section>
-
 <!-- Info Area -->
 <section id="info-area">
 
-    情報表示エリア
+    <div class="info-row">
+        金貨：<span id="gold">0</span>
+    </div>
+
+    <div class="info-row">
+        DPS：<span id="dps">0</span>
+    </div>
 
 </section>
 
