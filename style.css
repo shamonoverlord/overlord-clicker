@@ -301,7 +301,7 @@ body{
 
     user-select:none;
     pointer-events:none;
-    animation: enemyIdleFloat 0.95s ease-in-out infinite;
+    animation: enemyIdleFloat 0.45s ease-in-out infinite;
 }
 
 #player-sprite{
@@ -312,7 +312,7 @@ body{
 
     user-select:none;
     pointer-events:none;
-    animation: playerIdleFloat 1.15s ease-in-out infinite;
+    animation: playerIdleFloat 0.55s ease-in-out infinite;
 }
 
 /* =========================
@@ -383,15 +383,15 @@ button{
     }
 
     25%{
-        transform:translateY(-6px);
+        transform:translateY(-4px);
     }
 
     50%{
-        transform:translateY(0px);
+        transform:translateY(-4px);
     }
 
     75%{
-        transform:translateY(6px);
+        transform:translateY(4px);
     }
 
     100%{
@@ -405,16 +405,16 @@ button{
         transform:translateY(0px);
     }
 
-    25%{
-        transform:translateY(-4px);
+    20%{
+        transform:translateY(3px);
     }
 
     50%{
-        transform:translateY(0px);
+        transform:translateY(3px);
     }
 
-    75%{
-        transform:translateY(4px);
+    70%{
+        transform:translateY(-3px);
     }
 
     100%{
