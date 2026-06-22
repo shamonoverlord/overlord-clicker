@@ -479,7 +479,7 @@ button{
     }
 
     35%{
-        transform:translateY(-14px) scaleX(0.95);
+        transform:translateY(-14px) scaleX(0.90);
     }
 
     70%{
