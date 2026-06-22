@@ -34,6 +34,7 @@ function showDamageText(damage) {
 enemyArea.addEventListener("click", () => {
     enemyHp -= tapDamage;
 
+    playEnemyHitAnimation();
     showDamageText(tapDamage);
 
     if (enemyHp <= 0) {
@@ -61,6 +62,12 @@ document.addEventListener("dragstart", (event) => {
     event.preventDefault();
 });
 
+function playEnemyHitAnimation() {
+    enemyArea.classList.remove("enemy-hit");
 
+    void enemyArea.offsetWidth;
+
+    enemyArea.classList.add("enemy-hit");
+}
 
 
