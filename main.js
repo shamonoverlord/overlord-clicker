@@ -305,6 +305,7 @@ function failBossBattle() {
 const tabWindow = document.getElementById("tab-window");
 const tabContent = document.getElementById("tab-content");
 const tabButtons = document.querySelectorAll(".tab-btn");
+const tabs = document.getElementById("tabs");
 const tabCloseButton = document.getElementById("tab-close-button");
 const tabExpandButton = document.getElementById("tab-expand-button");
 
@@ -326,6 +327,7 @@ function openTab(tabKey) {
     tabContent.textContent = tabNames[tabKey];
 
     tabWindow.classList.add("open");
+    tabs.classList.add("hidden-tabs");
 
     tabButtons.forEach((button) => {
         button.classList.remove("active-tab");
@@ -342,6 +344,7 @@ function closeTab() {
 
     tabWindow.classList.remove("open");
     tabWindow.classList.remove("expanded");
+    tabs.classList.remove("hidden-tabs");
 
     tabButtons.forEach((button) => {
         button.classList.remove("active-tab");
