@@ -302,7 +302,31 @@ function failBossBattle() {
     setNormalEnemy();
 }
 
+const tabContent = document.getElementById("tab-content");
+const tabButtons = document.querySelectorAll(".tab-btn");
 
+const tabNames = {
+    enri: "エンリタブ",
+    allies: "仲間タブ",
+    equipment: "装備タブ",
+    pet: "ペットタブ",
+    items: "アイテムタブ",
+    other: "その他タブ"
+};
+
+tabButtons.forEach((button) => {
+    button.addEventListener("pointerdown", () => {
+        const tabKey = button.dataset.tab;
+
+        tabContent.textContent = tabNames[tabKey];
+
+        tabButtons.forEach((tabButton) => {
+            tabButton.classList.remove("active-tab");
+        });
+
+        button.classList.add("active-tab");
+    });
+});
 
 
 
