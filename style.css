@@ -470,25 +470,20 @@ button{
 
 #player-sprite.player-attack{
     transform-origin:50% 100%;
-    animation:playerAttack 0.28s steps(1);
+    animation:playerAttack 0.14s steps(1);
 }
 
 @keyframes playerAttack{
     0%{
-        transform:translateY(0) scaleX(1);
-    }
-
-    35%{
-        transform:translateY(-14px) scaleX(0.90);
+        transform:translateY(-14px) scaleX(0.95);
     }
 
     70%{
-        transform:translateY(-14px) scaleX(0.90);
+        transform:translateY(-14px) scaleX(0.95);
     }
 
     100%{
         transform:translateY(0) scaleX(1);
     }
 }
-
 
