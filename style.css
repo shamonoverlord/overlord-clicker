@@ -733,6 +733,45 @@ button{
     }
 }
 
+#enemy-sprite.enemy-defeated{
+    transform-origin:50% 100%;
+    animation:enemyDefeated 0.2s linear forwards;
+}
+
+@keyframes enemyDefeated{
+    0%{
+        transform:skewX(20deg) scaleX(0.65) scaleY(1.20);
+        filter:brightness(1);
+        opacity:1;
+    }
+
+    100%{
+        transform:skewX(20deg) scaleX(0.65) scaleY(1.20);
+        filter:brightness(5);
+        opacity:0;
+    }
+}
+
+#enemy-sprite.enemy-spawn{
+    transform-origin:50% 100%;
+    animation:enemySpawn 0.1s steps(1);
+}
+
+@keyframes enemySpawn{
+    0%{
+        transform:scaleY(0.05) scaleX(0.4);
+        opacity:0;
+    }
+
+    100%{
+        transform:scaleY(1) scaleX(1);
+        opacity:1;
+    }
+}
+
+
+
+
 
 
 
