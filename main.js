@@ -13,6 +13,7 @@ let bossTimerId = null;
 
 let bossChallengeStage = null;
 let canChallengeBoss = false;
+let isEnemyChanging = false;
 let totalDps = 0;
 
 const allies = [
@@ -296,6 +297,42 @@ function playEnemyHitAnimation() {
     }, 100);
 }
 
+function playEnemySpawnAnimation() {
+    enemySprite.classList.remove("enemy-spawn");
+
+    void enemySprite.offsetWidth;
+
+    enemySprite.classList.add("enemy-spawn");
+
+    setTimeout(() => {
+        enemySprite.classList.remove("enemy-spawn");
+    }, 100);
+}
+
+function startEnemyDefeatAnimation() {
+    if (isEnemyChanging) {
+        return;
+    }
+
+    isEnemyChanging = true;
+
+    enemySprite.classList.remove("enemy-hit-left");
+    enemySprite.classList.remove("enemy-hit-right");
+    enemySprite.classList.remove("enemy-spawn");
+
+    enemySprite.classList.add("enemy-defeated");
+
+    setTimeout(() => {
+        defeatEnemy();
+
+        enemySprite.classList.remove("enemy-defeated");
+
+        playEnemySpawnAnimation();
+
+        isEnemyChanging = false;
+    }, 200);
+}
+
 function playPlayerAttackAnimation() {
     playerSprite.classList.remove("player-attack");
 
@@ -319,11 +356,12 @@ enemyArea.addEventListener("pointerdown", () => {
     playEnemyHitAnimation();
     showDamageText(tapDamage);
 
-    if (enemyHp <= 0) {
-        defeatEnemy();
-    } else {
-        updateEnemyUI();
-    }
+if (enemyHp <= 0) {
+    updateEnemyUI();
+    startEnemyDefeatAnimation();
+} else {
+    updateEnemyUI();
+}
 });
 
 bossButton.addEventListener("pointerdown", () => {
@@ -512,11 +550,12 @@ playEnemyHitAnimation();
 const side = ally.positionClass === "ally-left" ? "left" : "right";
 showAllyDamageText(damage, side);
 
-    if (enemyHp <= 0) {
-        defeatEnemy();
-    } else {
-        updateEnemyUI();
-    }
+if (enemyHp <= 0) {
+    updateEnemyUI();
+    startEnemyDefeatAnimation();
+} else {
+    updateEnemyUI();
+}
 }
 
 function startAllyAutoAttacks() {
