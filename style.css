@@ -99,32 +99,80 @@ body{
     overflow:hidden;
 }
 
-#left-allies{
+#allies-layer{
     position:absolute;
 
-    left:10px;
-    top:50%;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
 
-    transform:translateY(-50%);
+    pointer-events:none;
 
-    width:70px;
-    height:120px;
-
-    border:2px solid white;
+    z-index:5;
 }
 
-#right-allies{
+.ally-character{
     position:absolute;
 
-    right:10px;
-    top:50%;
+    width:12vmin;
+    height:12vmin;
 
-    transform:translateY(-50%);
+    max-width:70px;
+    max-height:70px;
 
-    width:70px;
-    height:120px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-    border:2px solid white;
+    pointer-events:none;
+}
+
+.ally-character img{
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+}
+
+.ally-left{
+    left:18%;
+    bottom:28%;
+}
+
+.ally-right{
+    right:18%;
+    bottom:28%;
+}
+
+.ally-idle-a img{
+    animation: allyIdleA 0.7s steps(1) infinite;
+}
+
+.ally-idle-b img{
+    animation: allyIdleB 0.9s steps(1) infinite;
+}
+
+.ally-attack img{
+    animation: allyAttack 0.12s steps(1);
+}
+
+@keyframes allyIdleA{
+    0%{ transform:translateY(0); }
+    50%{ transform:translateY(-3px); }
+    100%{ transform:translateY(0); }
+}
+
+@keyframes allyIdleB{
+    0%{ transform:translateY(0) rotate(0deg); }
+    50%{ transform:translateY(2px) rotate(2deg); }
+    100%{ transform:translateY(0) rotate(0deg); }
+}
+
+@keyframes allyAttack{
+    0%{ transform:translateY(-8px) scaleX(0.95); }
+    70%{ transform:translateY(-8px) scaleX(0.95); }
+    100%{ transform:translateY(0) scaleX(1); }
 }
 
 #enemy-area{
