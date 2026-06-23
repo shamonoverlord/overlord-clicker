@@ -254,6 +254,30 @@ function showDamageText(damage) {
     });
 }
 
+function showAllyDamageText(damage, side) {
+    const damageText = document.createElement("div");
+
+    damageText.className = "ally-damage-text";
+
+    if (side === "left") {
+        damageText.classList.add("ally-damage-left");
+    } else {
+        damageText.classList.add("ally-damage-right");
+    }
+
+    const randomY = Math.floor(Math.random() * 50) - 25;
+    const randomX = Math.floor(Math.random() * 30) - 15;
+
+    damageText.style.transform = `translate(${randomX}px, ${randomY}px)`;
+    damageText.textContent = damage;
+
+    enemyArea.appendChild(damageText);
+
+    damageText.addEventListener("animationend", () => {
+        damageText.remove();
+    });
+}
+
 function playEnemyHitAnimation() {
     enemySprite.classList.remove("enemy-hit-left");
     enemySprite.classList.remove("enemy-hit-right");
@@ -482,9 +506,11 @@ function allyAttackEnemy(ally) {
         enemyHp = 0;
     }
 
-    playAllyAttackAnimation(ally);
-    playEnemyHitAnimation();
-    showDamageText(damage);
+playAllyAttackAnimation(ally);
+playEnemyHitAnimation();
+
+const side = ally.positionClass === "ally-left" ? "left" : "right";
+showAllyDamageText(damage, side);
 
     if (enemyHp <= 0) {
         defeatEnemy();
