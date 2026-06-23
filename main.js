@@ -306,7 +306,7 @@ function playEnemySpawnAnimation() {
 
     setTimeout(() => {
         enemySprite.classList.remove("enemy-spawn");
-    }, 100);
+    }, 200);
 }
 
 function startEnemyDefeatAnimation() {
