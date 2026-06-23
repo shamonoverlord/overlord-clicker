@@ -34,7 +34,7 @@ const allies = [
         image: "img/allies/a002_shuringan.png",
         level: 1,
         baseDamage: 8,
-        attackInterval: 1000,
+        attackInterval: 1200,
         positionClass: "ally-right",
         idleClass: "ally-idle-b",
         element: null,
