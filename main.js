@@ -13,6 +13,34 @@ let bossTimerId = null;
 
 let bossChallengeStage = null;
 let canChallengeBoss = false;
+let totalDps = 0;
+
+const allies = [
+    {
+        id: "jugem",
+        name: "ゴブリン・リーダー ジュゲム",
+        image: "img/allies/a001_jugem.png",
+        level: 1,
+        baseDamage: 5,
+        attackInterval: 1000,
+        positionClass: "ally-left",
+        idleClass: "ally-idle-a",
+        element: null,
+        timerId: null
+    },
+    {
+        id: "shuringan",
+        name: "ゴブリン・アーチャー シューリンガン",
+        image: "img/allies/a002_shuringan.png",
+        level: 1,
+        baseDamage: 8,
+        attackInterval: 1000,
+        positionClass: "ally-right",
+        idleClass: "ally-idle-b",
+        element: null,
+        timerId: null
+    }
+];
 
 const normalEnemyPath = "img/enemies/normal/";
 const bossEnemyPath = "img/enemies/boss/";
@@ -49,6 +77,9 @@ const bossTimeBar = document.getElementById("boss-time-bar");
 const goldText = document.getElementById("gold");
 const tabGoldText = document.getElementById("tab-gold");
 const playerSprite = document.getElementById("player-sprite");
+const alliesLayer = document.getElementById("allies-layer");
+const dpsText = document.getElementById("dps");
+const tabDpsText = document.getElementById("tab-dps");
 
 function updateEnemyUI() {
     const percent = enemyHp / enemyMaxHp * 100;
@@ -293,6 +324,8 @@ document.addEventListener("dragstart", (event) => {
 });
 
 updateGoldUI();
+renderAllies();
+startAllyAutoAttacks();
 setNormalEnemy();
 
 function failBossBattle() {
@@ -390,7 +423,97 @@ function updateGoldUI() {
     tabGoldText.textContent = gold;
 }
 
+function updateDpsUI() {
+    dpsText.textContent = totalDps;
+    tabDpsText.textContent = totalDps;
+}
 
+function getAllyDamage(ally) {
+    return ally.level * ally.baseDamage;
+}
+
+function renderAllies() {
+    alliesLayer.innerHTML = "";
+
+    allies.forEach((ally) => {
+        if (ally.level <= 0) {
+            return;
+        }
+
+        const allyElement = document.createElement("div");
+        allyElement.className = `ally-character ${ally.positionClass} ${ally.idleClass}`;
+
+        allyElement.innerHTML = `
+            <img src="${ally.image}" alt="${ally.name}">
+        `;
+
+        alliesLayer.appendChild(allyElement);
+
+        ally.element = allyElement;
+    });
+}
+
+function playAllyAttackAnimation(ally) {
+    if (!ally.element) {
+        return;
+    }
+
+    ally.element.classList.remove("ally-attack");
+
+    void ally.element.offsetWidth;
+
+    ally.element.classList.add("ally-attack");
+
+    setTimeout(() => {
+        ally.element.classList.remove("ally-attack");
+    }, 120);
+}
+
+function allyAttackEnemy(ally) {
+    if (ally.level <= 0) {
+        return;
+    }
+
+    const damage = getAllyDamage(ally);
+
+    enemyHp -= damage;
+
+    if (enemyHp < 0) {
+        enemyHp = 0;
+    }
+
+    playAllyAttackAnimation(ally);
+    playEnemyHitAnimation();
+    showDamageText(damage);
+
+    if (enemyHp <= 0) {
+        defeatEnemy();
+    } else {
+        updateEnemyUI();
+    }
+}
+
+function startAllyAutoAttacks() {
+    totalDps = 0;
+
+    allies.forEach((ally) => {
+        if (ally.timerId !== null) {
+            clearInterval(ally.timerId);
+        }
+
+        if (ally.level <= 0) {
+            return;
+        }
+
+        totalDps += getAllyDamage(ally);
+
+        ally.timerId = setInterval(() => {
+            allyAttackEnemy(ally);
+        }, ally.attackInterval);
+    });
+
+    updateDpsUI();
+}
 
 
 
