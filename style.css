@@ -798,7 +798,7 @@ button{
 
 .character-upgrade-card{
     width:100%;
-    height:86px;
+    height:150px;
 
     display:grid;
     grid-template-columns:64px 1fr 120px;
