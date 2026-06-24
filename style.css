@@ -808,7 +808,7 @@ button{
     padding:8px 10px;
 
     background-image:url("img/ui/select_background.png");
-    background-size:100% 150%;
+    background-size:100% auto;
     background-repeat:no-repeat;
     background-position:center top;
 
