@@ -107,7 +107,7 @@ body{
     background-image:url("img/ui/background_stage01.png");
     background-size:cover;
     background-repeat:no-repeat;
-    background-position:center -380px;
+    background-position:center -20px;
 
     overflow:hidden;
 }
