@@ -792,7 +792,100 @@ button{
     }
 }
 
+/* =========================
+   ENRI TAB
+========================= */
 
+.character-upgrade-card{
+    width:100%;
+    min-height:120px;
+
+    display:grid;
+    grid-template-columns:90px 1fr 140px;
+    gap:12px;
+    align-items:center;
+
+    padding:10px;
+
+    background-image:url("img/ui/select_background.png");
+    background-size:100% 100%;
+    background-repeat:no-repeat;
+    background-position:center;
+
+    color:white;
+}
+
+.character-face-box{
+    width:90px;
+    height:90px;
+
+    background:#888;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+}
+
+.character-face{
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+}
+
+.character-info{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+
+    font-weight:bold;
+}
+
+.character-name{
+    font-size:18px;
+}
+
+.character-level{
+    font-size:16px;
+}
+
+.level-up-button{
+    height:90px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    border:3px solid #c97916;
+
+    background:linear-gradient(#ff9a1c, #f26a00);
+
+    color:white;
+
+    font-weight:bold;
+}
+
+.level-up-cost{
+    width:100%;
+
+    padding:4px 0;
+    margin-bottom:4px;
+
+    background:#b82b00;
+
+    font-size:14px;
+}
+
+.level-up-main{
+    font-size:18px;
+}
+
+.level-up-dps{
+    font-size:14px;
+}
 
 
 
