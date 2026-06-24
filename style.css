@@ -45,14 +45,17 @@ body{
     display:flex;
     flex-direction:column;
 
-    background:#1f1f1f;
+    background-color:#1f1f1f;
+    background-image:url("img/ui/lower_background.png");
+    background-size:cover;
+    background-position:center bottom;
+    background-repeat:no-repeat;
 
     overflow:hidden;
 
     touch-action:manipulation;
 
     position:relative;
-    
 }
 
 /* =========================
@@ -341,7 +344,7 @@ body{
 #info-area{
     flex:1;
 
-    background:#2b2b2b;
+    background:transparent;
 
     padding:10px;
 
@@ -379,7 +382,7 @@ body{
     align-items:center;
     gap:10px;
 
-    background:#171717;
+    background:transparent;
 }
 
 .skill-btn{
@@ -399,6 +402,9 @@ body{
     display:flex;
 
     flex-shrink:0;
+
+    position:relative;
+    z-index:120;
 }
 
 .tab-btn{
