@@ -409,8 +409,26 @@ const tabExpandButton = document.getElementById("tab-expand-button");
 let activeTab = null;
 let isTabExpanded = false;
 
-const tabNames = {
-    enri: "エンリタブ",
+const tabContents = {
+    enri: `
+        <div class="character-upgrade-card">
+            <div class="character-face-box">
+                <img class="character-face" src="img/player/enri_face.png" alt="エンリ">
+            </div>
+
+            <div class="character-info">
+                <div class="character-name">エンリ</div>
+                <div class="character-level">Lv.10</div>
+            </div>
+
+            <button class="level-up-button">
+                <div class="level-up-cost">金貨 79</div>
+                <div class="level-up-main">レベルアップ</div>
+                <div class="level-up-dps">+4.8 DPS</div>
+            </button>
+        </div>
+    `,
+
     allies: "仲間タブ",
     equipment: "装備タブ",
     pet: "ペットタブ",
@@ -421,7 +439,7 @@ const tabNames = {
 function openTab(tabKey) {
     activeTab = tabKey;
 
-    tabContent.textContent = tabNames[tabKey];
+    tabContent.innerHTML = tabContents[tabKey];
 
     tabWindow.classList.add("open");
     tabs.classList.add("hidden-tabs");
