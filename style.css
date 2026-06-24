@@ -887,7 +887,14 @@ button{
     font-size:14px;
 }
 
-
+.character-upgrade-card,
+.level-up-button{
+    text-shadow:
+        1px 1px 0 #000,
+        -1px 1px 0 #000,
+        1px -1px 0 #000,
+        -1px -1px 0 #000;
+}
 
 
 
