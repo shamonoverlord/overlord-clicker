@@ -102,7 +102,7 @@ body{
 #battlefield{
     position:relative;
 
-    height:60vh;
+    height:66vh;
 
     background-image:url("img/ui/background_stage01.png");
     background-size:cover;
@@ -349,6 +349,9 @@ body{
     padding:10px;
 
     overflow:hidden;
+
+    position:relative;
+    z-index:20;
 }
 
 #info-top-row{
