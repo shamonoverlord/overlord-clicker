@@ -26,6 +26,7 @@ const allies = [
         attackInterval: 1750,
         positionClass: "ally-left",
         idleClass: "ally-idle-a",
+        isSpriteSheet: true,
         element: null,
         timerId: null
     },
@@ -523,9 +524,19 @@ function renderAllies() {
         const allyElement = document.createElement("div");
         allyElement.className = `ally-character ${ally.positionClass} ${ally.idleClass}`;
 
-        allyElement.innerHTML = `
-            <img src="${ally.image}" alt="${ally.name}">
-        `;
+        if (ally.isSpriteSheet) {
+            allyElement.innerHTML = `
+                <div
+                    class="ally-sprite-sheet"
+                    style="background-image:url('${ally.image}')"
+                    aria-label="${ally.name}"
+                ></div>
+            `;
+        } else {
+            allyElement.innerHTML = `
+                <img src="${ally.image}" alt="${ally.name}">
+            `;
+        }
 
         alliesLayer.appendChild(allyElement);
 
