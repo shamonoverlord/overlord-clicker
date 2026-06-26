@@ -591,7 +591,7 @@ function allyAttackEnemy(ally) {
         } else {
             updateEnemyUI();
         }
-    }, 280);
+    }, 250);
 }
 
 function startAllyAutoAttacks() {
