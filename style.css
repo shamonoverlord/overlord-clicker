@@ -182,7 +182,7 @@ body{
 }
 
 .ally-attack .ally-sprite-sheet{
-    animation: allySpriteAttack 0.50s steps(1);
+    animation: allySpriteAttack 0.75s steps(1);
 }
 
 @keyframes allyIdleA{
@@ -206,22 +206,22 @@ body{
 @keyframes allySpriteAttack{
     0%{
         background-position:50% 0%;
-        transform:translateY(-4px);
+        transform:translateY(0px);
     }
 
-    55%{
+    33%{
         background-position:50% 0%;
-        transform:translateY(-4px);
+        transform:translateY(0px);
     }
 
-    56%{
+    34%{
         background-position:100% 0%;
-        transform:translateY(-8px);
+        transform:translateY(0px);
     }
 
-    85%{
+    99%{
         background-position:100% 0%;
-        transform:translateY(-8px);
+        transform:translateY(0px);
     }
 
     100%{
