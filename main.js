@@ -557,7 +557,7 @@ function playAllyAttackAnimation(ally) {
 
     setTimeout(() => {
         ally.element.classList.remove("ally-attack");
-    }, 120);
+    }, 500);
 }
 
 function allyAttackEnemy(ally) {
