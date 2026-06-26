@@ -561,30 +561,37 @@ function playAllyAttackAnimation(ally) {
 }
 
 function allyAttackEnemy(ally) {
-    if (ally.level <= 0) {
+    if (ally.level <= 0 || isEnemyChanging) {
         return;
     }
 
     const damage = getAllyDamage(ally);
 
-    enemyHp -= damage;
+    playAllyAttackAnimation(ally);
 
-    if (enemyHp < 0) {
-        enemyHp = 0;
-    }
+    setTimeout(() => {
+        if (isEnemyChanging) {
+            return;
+        }
 
-playAllyAttackAnimation(ally);
-playEnemyHitAnimation();
+        enemyHp -= damage;
 
-const side = ally.positionClass === "ally-left" ? "left" : "right";
-showAllyDamageText(damage, side);
+        if (enemyHp < 0) {
+            enemyHp = 0;
+        }
 
-if (enemyHp <= 0) {
-    updateEnemyUI();
-    startEnemyDefeatAnimation();
-} else {
-    updateEnemyUI();
-}
+        playEnemyHitAnimation();
+
+        const side = ally.positionClass === "ally-left" ? "left" : "right";
+        showAllyDamageText(damage, side);
+
+        if (enemyHp <= 0) {
+            updateEnemyUI();
+            startEnemyDefeatAnimation();
+        } else {
+            updateEnemyUI();
+        }
+    }, 280);
 }
 
 function startAllyAutoAttacks() {
