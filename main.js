@@ -590,8 +590,8 @@ function renderAlliesTab() {
                 <div class="character-face-box">
                     <img
                         class="character-face"
-                        src="img/allies/a001_${ally.id}_face.png"
                         src="${ally.faceImage}"
+                        alt="${ally.name}">
                 </div>
 
                 <div class="character-info">
