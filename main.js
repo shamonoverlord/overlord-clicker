@@ -394,11 +394,6 @@ document.addEventListener("dragstart", (event) => {
     event.preventDefault();
 });
 
-updateGoldUI();
-renderAllies();
-startAllyAutoAttacks();
-setNormalEnemy();
-
 function failBossBattle() {
     stopBossTimer();
 
@@ -677,7 +672,10 @@ function startAllyAutoAttacks() {
     updateDpsUI();
 }
 
-
+updateGoldUI();
+renderAllies();
+startAllyAutoAttacks();
+setNormalEnemy();
 
 
 
