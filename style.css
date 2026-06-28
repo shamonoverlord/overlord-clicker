@@ -938,6 +938,12 @@ button{
         -1px -1px 0 #000;
 }
 
+.level-up-button.disabled{
+    opacity:0.45;
+    filter:grayscale(1);
+}
+
+
 
 
 
