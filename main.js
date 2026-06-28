@@ -4,7 +4,15 @@ let enemyMaxHp = 100;
 let enemyHp = 100;
 
 let gold = 0;
-let tapDamage = 10;
+const enri = {
+    level: 1,
+    baseDamage: 10,
+    damagePerLevel: 5,
+    baseLevelUpCost: 20,
+    costGrowth: 1.15
+};
+
+let tapDamage = calculateEnriTapDamage();
 
 let isBossBattle = false;
 let bossTimeLimit = 60;
@@ -411,24 +419,14 @@ let activeTab = null;
 let isTabExpanded = false;
 
 const tabContents = {
-    enri: `
-        <div class="character-upgrade-card">
-            <div class="character-face-box">
-                <img class="character-face" src="img/player/enri_face.png" alt="エンリ">
-            </div>
+    enri: renderEnriTab,
 
-            <div class="character-info">
-                <div class="character-name">エンリ</div>
-                <div class="character-level">Lv.10</div>
-            </div>
-
-            <button class="level-up-button">
-                <div class="level-up-cost">金貨 79</div>
-                <div class="level-up-main">レベルアップ</div>
-                <div class="level-up-dps">+4.8 DPS</div>
-            </button>
-        </div>
-    `,
+    allies: () => "仲間タブ",
+    equipment: () => "装備タブ",
+    pet: () => "ペットタブ",
+    items: () => "アイテムタブ",
+    other: () => "その他タブ"
+};
 
     allies: "仲間タブ",
     equipment: "装備タブ",
@@ -440,7 +438,7 @@ const tabContents = {
 function openTab(tabKey) {
     activeTab = tabKey;
 
-    tabContent.innerHTML = tabContents[tabKey];
+    tabContent.innerHTML = tabContents[tabKey]();
 
     tabWindow.classList.add("open");
     tabs.classList.add("hidden-tabs");
@@ -499,9 +497,79 @@ tabExpandButton.addEventListener("pointerdown", () => {
     toggleTabExpand();
 });
 
+tabContent.addEventListener("pointerdown", (event) => {
+    if (event.target.closest("#enri-level-up-button")) {
+        event.stopPropagation();
+        levelUpEnri();
+    }
+});
+
 function updateGoldUI() {
     goldText.textContent = gold;
     tabGoldText.textContent = gold;
+
+    refreshActiveTab();
+}
+
+function calculateEnriTapDamage() {
+    return enri.baseDamage + (enri.level - 1) * enri.damagePerLevel;
+}
+
+function calculateEnriLevelUpCost() {
+    return Math.floor(enri.baseLevelUpCost * Math.pow(enri.costGrowth, enri.level - 1));
+}
+
+function renderEnriTab() {
+    const cost = calculateEnriLevelUpCost();
+    const nextDamage = calculateEnriTapDamage() + enri.damagePerLevel;
+    const canLevelUp = gold >= cost;
+
+    return `
+        <div class="character-upgrade-card">
+            <div class="character-face-box">
+                <img class="character-face" src="img/player/enri_face.png" alt="エンリ">
+            </div>
+
+            <div class="character-info">
+                <div class="character-name">エンリ</div>
+                <div class="character-level">Lv.${enri.level}</div>
+                <div class="character-level">タップ ${tapDamage}</div>
+            </div>
+
+            <button
+                class="level-up-button ${canLevelUp ? "" : "disabled"}"
+                id="enri-level-up-button"
+                ${canLevelUp ? "" : "disabled"}
+            >
+                <div class="level-up-cost">金貨 ${cost}</div>
+                <div class="level-up-main">レベルアップ</div>
+                <div class="level-up-dps">タップ ${tapDamage} → ${nextDamage}</div>
+            </button>
+        </div>
+    `;
+}
+
+function refreshActiveTab() {
+    if (activeTab === null) {
+        return;
+    }
+
+    tabContent.innerHTML = tabContents[activeTab]();
+}
+
+function levelUpEnri() {
+    const cost = calculateEnriLevelUpCost();
+
+    if (gold < cost) {
+        return;
+    }
+
+    gold -= cost;
+    enri.level += 1;
+    tapDamage = calculateEnriTapDamage();
+
+    updateGoldUI();
+    refreshActiveTab();
 }
 
 function updateDpsUI() {
