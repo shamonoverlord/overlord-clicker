@@ -29,6 +29,7 @@ const allies = [
         id: "jugem",
         name: "ゴブリン・リーダー ジュゲム",
         image: "img/allies/a001_jugem.png",
+        faceImage: "img/allies/a001_jugem_face.png",
         level: 1,
         baseDamage: 5,
         attackInterval: 1750,
@@ -42,6 +43,7 @@ const allies = [
         id: "shuringan",
         name: "ゴブリン・アーチャー シューリンガン",
         image: "img/allies/a002_shuringan.png",
+        faceImage: "img/allies/a002_shuringan_face.png",
         level: 1,
         baseDamage: 8,
         attackInterval: 2200,
@@ -589,7 +591,7 @@ function renderAlliesTab() {
                     <img
                         class="character-face"
                         src="img/allies/${ally.id}_face.png"
-                        alt="${ally.name}">
+                        src="${ally.faceImage}"
                 </div>
 
                 <div class="character-info">
