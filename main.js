@@ -415,8 +415,7 @@ let isTabExpanded = false;
 
 const tabContents = {
     enri: renderEnriTab,
-
-    allies: () => "仲間タブ",
+    allies: renderAlliesTab,
     equipment: () => "装備タブ",
     pet: () => "ペットタブ",
     items: () => "アイテムタブ",
@@ -486,12 +485,23 @@ tabExpandButton.addEventListener("pointerdown", () => {
 });
 
 tabContent.addEventListener("pointerdown", (event) => {
-    if (event.target.closest("#enri-level-up-button")) {
+
+    const enriButton = event.target.closest("#enri-level-up-button");
+
+    if (enriButton) {
         event.stopPropagation();
         levelUpEnri();
+        return;
     }
-});
 
+    const allyButton = event.target.closest("[data-ally]");
+
+    if (allyButton) {
+        event.stopPropagation();
+        levelUpAlly(allyButton.dataset.ally);
+    }
+
+});
 function updateGoldUI() {
     goldText.textContent = gold;
     tabGoldText.textContent = gold;
@@ -555,6 +565,85 @@ function levelUpEnri() {
     gold -= cost;
     enri.level += 1;
     tapDamage = calculateEnriTapDamage();
+
+    updateGoldUI();
+    refreshActiveTab();
+}
+
+function calculateAllyLevelUpCost(ally) {
+    return Math.floor(50 * Math.pow(1.15, ally.level - 1));
+}
+
+function renderAlliesTab() {
+
+    return allies.map((ally) => {
+
+        const cost = calculateAllyLevelUpCost(ally);
+        const nextDamage = getAllyDamage(ally) + ally.baseDamage;
+        const canLevelUp = gold >= cost;
+
+        return `
+            <div class="character-upgrade-card">
+
+                <div class="character-face-box">
+                    <img
+                        class="character-face"
+                        src="img/allies/${ally.id}_face.png"
+                        alt="${ally.name}">
+                </div>
+
+                <div class="character-info">
+                    <div class="character-name">${ally.name}</div>
+                    <div class="character-level">Lv.${ally.level}</div>
+                    <div class="character-level">${getAllyDamage(ally)} DPS</div>
+                </div>
+
+                <button
+                    class="level-up-button ${canLevelUp ? "" : "disabled"}"
+                    data-ally="${ally.id}"
+                    ${canLevelUp ? "" : "disabled"}>
+
+                    <div class="level-up-cost">
+                        金貨 ${cost}
+                    </div>
+
+                    <div class="level-up-main">
+                        レベルアップ
+                    </div>
+
+                    <div class="level-up-dps">
+                        ${getAllyDamage(ally)}
+                        →
+                        ${nextDamage} DPS
+                    </div>
+
+                </button>
+
+            </div>
+        `;
+
+    }).join("");
+
+}
+
+function levelUpAlly(id) {
+
+    const ally = allies.find(a => a.id === id);
+
+    if (!ally) {
+        return;
+    }
+
+    const cost = calculateAllyLevelUpCost(ally);
+
+    if (gold < cost) {
+        return;
+    }
+
+    gold -= cost;
+    ally.level++;
+
+    startAllyAutoAttacks();
 
     updateGoldUI();
     refreshActiveTab();
