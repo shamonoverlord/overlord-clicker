@@ -840,19 +840,20 @@ button{
 
 .character-upgrade-card{
     width:100%;
-    height:86px;
+    min-height:86px;
 
     display:grid;
-    grid-template-columns:64px 1fr 120px;
+    grid-template-columns:64px minmax(0, 1fr) 120px;
     gap:10px;
     align-items:center;
 
     padding:8px 10px;
+    margin-bottom:8px;
 
     background-image:url("img/ui/select_background.png");
-    background-size:100% auto;
+    background-size:100% 100%;
     background-repeat:no-repeat;
-    background-position:center top;
+    background-position:center;
 
     color:white;
 }
@@ -887,6 +888,10 @@ button{
 
 .character-name{
     font-size:15px;
+
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
 }
 
 .character-level{
