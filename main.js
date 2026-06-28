@@ -428,13 +428,6 @@ const tabContents = {
     other: () => "その他タブ"
 };
 
-    allies: "仲間タブ",
-    equipment: "装備タブ",
-    pet: "ペットタブ",
-    items: "アイテムタブ",
-    other: "その他タブ"
-};
-
 function openTab(tabKey) {
     activeTab = tabKey;
 
